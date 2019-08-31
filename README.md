@@ -1,16 +1,21 @@
 # yo generator-rest
 
 ``` Javascript
-// See docs generator rest api: https://www.npmjs.com/package/generator-rest
 
+// INSTALL
+npm i ygr --save
+
+// See docs generator rest api: https://www.npmjs.com/package/generator-rest
 npm install -g yo
 npm install -g generator-rest
 
-yo rest // generate a new project
-yo rest:api // generate a new api endpoint inside your project
+// generate a new project
+yo rest
+
+// generate a new api endpoint inside your project
+yo rest:api
 
 ```
-npm i ygr --save
 
 ``` javascript
 
