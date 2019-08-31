@@ -47,12 +47,35 @@ Api.auth(email, passw, key, ip)
 )
 
 ```
+``` javascript
+
+// Add data
+
+Api.add('/type', 'a=b&c=d', key, ip)
+.then(
+  success => console.log(success),
+  err => console.log(err)
+)
+
+```
 
 ``` javascript
 
 // Get data
 
 Api.get('/type', 'a=b&c=d', key, ip)
+.then(
+  success => console.log(success),
+  err => console.log(err)
+)
+
+```
+
+``` javascript
+
+// Update data
+
+Api.update(id, '/type', 'a=b&c=d', key, ip)
 .then(
   success => console.log(success),
   err => console.log(err)
