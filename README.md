@@ -2,18 +2,28 @@
 
 ``` Javascript
 
-// INSTALL
+// INSTALL YGR
+
 npm i ygr --save
 
-// See docs generator rest api: https://www.npmjs.com/package/generator-rest
+
+// install mongodb and see docs generator rest api:
+// https://www.npmjs.com/package/generator-rest
+
 npm install -g yo
 npm install -g generator-rest
 
+
 // generate a new project
+
 yo rest
 
+
 // generate a new api endpoint inside your project
+
 yo rest:api
+
+
 
 ```
 
