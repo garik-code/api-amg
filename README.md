@@ -1,5 +1,17 @@
 # API ❤ AMG
 
+Install mongodb: https://docs.mongodb.com/manual/installation/
+
+npm install api-amg --save
+npm install -g yo
+npm install -g generator-rest
+
+yo rest
+
+yo rest:api
+
+
+
 ``` Javascript
 
 /////////////////////////////////////////////////////////////////
@@ -10,11 +22,6 @@
 npm install api-amg --save
 npm install -g yo
 npm install -g generator-rest
-
-
-// install mongodb
-
-https://docs.mongodb.com/manual/installation/
 
 
 // generate a new PRIVATE API
