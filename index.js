@@ -1,6 +1,41 @@
 const request = require('request')
 const exec = require('executive')
 
+exports.reg = (email, passw, name) => {
+  return new Promise((resolve, reject) => {
+    exports.add(`users`, `email=${email}&password=${passw}&name=${name}`).then(reg => resolve(reg), err => reject(err))
+  })
+}
+
+exports.auth = (email, passw, key, api) => {
+  return new Promise((resolve, reject) => {
+    let url = `http://${api}/auth`
+    exec.quiet([`curl -X POST ${url} -i -u ${email}:${passw} -d "access_token=${key}"`], (err, stdout, stderr) => {
+      try {
+        let token = stdout.split('"token":"')[1].split('","user')[0]
+        resolve(token)
+      } catch (e) {
+        reject('Unauthorized')
+      }
+    })
+  })
+}
+
+exports.check = (token, key, api) => {
+  console.log(token);
+  return new Promise((resolve, reject) => {
+    request.get(`http://${api}/users/me?access_token=${token}`, (error, response, body) => {
+      if(error) reject(error)
+      try {
+        body = JSON.parse(body)
+        resolve(body)
+      } catch (e) {
+        reject('err get data')
+      }
+    })
+  })
+}
+
 exports.get = (type, data, key, api) => {
   return new Promise((resolve, reject) => {
     request.get(`http://${api}/${type}?access_token=${key}&${data}`, (error, response, body) => {
@@ -13,26 +48,6 @@ exports.get = (type, data, key, api) => {
         reject('err get data')
       }
     })
-  })
-}
-
-exports.user = (type, data, key, api) => {
-  return new Promise((resolve, reject) => {
-    request.get(`http://${api}/${type}?${data}`, (error, response, body) => {
-      if(error) reject(error)
-      try {
-        body = JSON.parse(body)
-        resolve(body)
-      } catch (e) {
-        reject('err get data')
-      }
-    })
-  })
-}
-
-exports.me = (token, key, api) => {
-  return new Promise((resolve, reject) => {
-    exports.user(`users/me`, `access_token=${token}`, key, api).then(user => resolve(user), err => reject(err))
   })
 }
 
@@ -77,19 +92,5 @@ exports.update = (id, type, data, key, api) => {
         reject(error)
       }
     )
-  })
-}
-
-exports.auth = (email, passw, key, api) => {
-  return new Promise((resolve, reject) => {
-    let url = `http://${api}/auth`
-    exec.quiet([`curl -X POST ${url} -i -u ${email}:${passw} -d "access_token=${key}"`], (err, stdout, stderr) => {
-      try {
-        let token = stdout.split('"token":"')[1].split('","user')[0]
-        resolve(token)
-      } catch (e) {
-        reject('Unauthorized')
-      }
-    })
   })
 }

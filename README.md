@@ -1,13 +1,13 @@
-# yo generator-rest
+# API ❤ AMG
 
 ``` Javascript
 
 /////////////////////////////////////////////////////////////////
 
 
-// INSTALL YGR
+// INSTALL AMG
 
-npm i ygr --save
+npm install api-amg --save
 
 
 // install mongodb and see docs generator rest api:
@@ -33,7 +33,7 @@ yo rest:api
 
 ``` javascript
 
-const Api = require('ygr')
+const Api = require('api-amg')
 
 ```
 ``` javascript
@@ -51,7 +51,7 @@ Api.auth(email, passw, key, ip)
 
 // Add data
 
-Api.add('/type', 'a=b&c=d', key, ip)
+Api.add('name', 'a=b&c=d', key, ip)
 .then(
   success => console.log(success),
   err => console.log(err)
@@ -63,7 +63,7 @@ Api.add('/type', 'a=b&c=d', key, ip)
 
 // Get data
 
-Api.get('/type', 'a=b&c=d', key, ip)
+Api.get('name', 'a=b&c=d', key, ip)
 .then(
   success => console.log(success),
   err => console.log(err)
@@ -75,7 +75,7 @@ Api.get('/type', 'a=b&c=d', key, ip)
 
 // Update data
 
-Api.update(id, '/type', 'a=b&c=d', key, ip)
+Api.update(id, 'name', 'a=b&c=d', key, ip)
 .then(
   success => console.log(success),
   err => console.log(err)
