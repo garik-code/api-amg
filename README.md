@@ -6,8 +6,8 @@
 npm install -g yo
 npm install -g generator-rest
 
-yo rest # generate a new project
-yo rest:api # generate a new api endpoint inside your project
+yo rest // generate a new project
+yo rest:api // generate a new api endpoint inside your project
 
 ```
 npm i ygr --save
