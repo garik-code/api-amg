@@ -8,21 +8,21 @@
 // INSTALL AMG
 
 npm install api-amg --save
-
-
-// install mongodb and see docs generator rest api:
-// https://www.npmjs.com/package/generator-rest
-
 npm install -g yo
 npm install -g generator-rest
 
 
-// generate a new project
+// install mongodb
+
+https://docs.mongodb.com/manual/installation/
+
+
+// generate a new PRIVATE API
 
 yo rest
 
 
-// generate a new api endpoint inside your project
+// generate a new API ENDPOINT inside your project
 
 yo rest:api
 
