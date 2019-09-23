@@ -32,14 +32,18 @@ yo rest:api
 
 ``` javascript
 
-const Api = require('api-amg')
+const Amg = require('api-amg')
+const Api = new Amg({
+  url: 'http://localhost:9000',
+  access_token: 'j8jx10hcOvxKP0kNPTEBzofBdfHgjjtZ'
+})
 
 ```
 ``` javascript
 
 // REG USER:
 
-Api.reg('mail@garik.site', 'password', 'Igor M', key, api)
+Api.reg('mail@garik.site', 'password', 'Igor M')
 .then(
   success => console.log(success),
   err     => console.log(err)
@@ -58,7 +62,7 @@ Api.reg('mail@garik.site', 'password', 'Igor M', key, api)
 
 // AUTH USER:
 
-Api.auth('mail@garik.site', 'password', key, api)
+Api.auth('mail@garik.site', 'password')
 .then(
   success => console.log(success),
   err     => console.log(err)
@@ -71,7 +75,7 @@ Api.auth('mail@garik.site', 'password', key, api)
 
 // CHECK AUTH USER:
 
-Api.check('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkODhjOWU5YTlhNmZlMDdlZjI5ZmJiOSIsImlhdCI6MTU2OTI0NTc2OH0.LbSkr0z1MhQhN5CJZTrc0GAD19ZJlDn-L3jIIWf1dPE', key, api)
+Api.check('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkODhjOWU5YTlhNmZlMDdlZjI5ZmJiOSIsImlhdCI6MTU2OTI0NTc2OH0.LbSkr0z1MhQhN5CJZTrc0GAD19ZJlDn-L3jIIWf1dPE')
 .then(
   success => console.log(success),
   err     => console.log(err)
@@ -89,7 +93,7 @@ Api.check('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkODhjOWU5YTlhNmZlMDdl
 
 // ADD DATA:
 
-Api.add('tests', { text: '123' }, key, api)
+Api.add('tests', { text: '123' })
 .then(
   success => console.log(success),
   err     => console.log(err)
@@ -107,7 +111,7 @@ Api.add('tests', { text: '123' }, key, api)
 
 // GET DATA:
 
-Api.get('tests', { id: '5d88cdd4a9a6fe07ef29fbba', text: '123' }, key, api)
+Api.get('tests', { id: '5d88cdd4a9a6fe07ef29fbba', text: '123' })
 .then(
   success => console.log(success),
   err     => console.log(err)

@@ -29,9 +29,9 @@ class AMG {
       })
     }
 
-    check (token) {
+    check (access_token) {
       return new Promise((resolve, reject) => {
-        request.get(`${this.url}/users/me?access_token=${token}`, (error, response, body) => {
+        request.get(`${this.url}/users/me?access_token=${access_token}`, (error, response, body) => {
           if(error) reject(error)
           try {
             body = JSON.parse(body)
