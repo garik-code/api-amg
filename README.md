@@ -37,14 +37,14 @@ yo rest:api
 
 const Amg = require('api-amg')
 const Api = new Amg({
-  private_api : {
-    url: 'http://localhost:9000', // private api url
-    access_token: 'j8jx10hcOvxKP0kNPTEBzofBdfHgjjtZ' // private api access token
+  private_api    : {
+    access_token : 'j8jx10hcOvxKP0kNPTEBzofBdfHgjjtZ', // private api access token
+    url          : 'http://localhost:9000'             // private api url
   },
-  memcashed: {
-    server : '127.0.0.1:11211', // memcashed server
-    options: {},
-    update : 1000 // millisecond update time
+  memcashed : {
+    server  : '127.0.0.1:11211', // memcashed server
+    options : {},                // memcached options
+    update  : 1000               // millisecond update time
   }
 })
 
