@@ -12,27 +12,27 @@ Install nodejs    : https://nodejs.org/en/download/
 /////////////////////////////////////////////////////////////////
 
 
-// Install generator private api
+# Install generator private api
 
 npm install -g yo
 npm install -g generator-rest
 
-// Generate a new PRIVATE API
+# Generate a new PRIVATE API
 
 cd /my-project
 mkdir private-api
 cd private-api
 yo rest
 
-// Generate a new API ENDPOINT inside your project
+# Generate a new API ENDPOINT inside your project
 
 yo rest:api
 
-// Take private api access token (MASTER_KEY)
+# Take private api access token (MASTER_KEY)
 
 nano .env
 
-// Install AMG
+# Install AMG
 
 cd /my-project
 mkdir rest-api
@@ -42,6 +42,8 @@ npm i api-amg --save
 nano index.js
 
 ...
+
+build a rest api using this module
 
 ```
 
