@@ -52,7 +52,7 @@ build a rest api using this module
 const Amg = require('api-amg')
 const Api = new Amg({
   private_api    : {
-    access_token : 'j8jx10hcOvxKP0kNPTEBzofBdfHgjjtZ', // private api access token
+    access_token : 'j8jx10hcOvxKP0kNPTEBzofBdfHgjjtZ', // private api access token (MASTER_KEY)
     url          : 'http://localhost:9000'             // private api url
   },
   memcashed : {
