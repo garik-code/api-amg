@@ -1,6 +1,6 @@
 {
   "name": "api-amg",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/garik-code/yo-generator-rest.git"
+    "url": "git+https://github.com/garik-code/api-amg.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/garik-code/yo-generator-rest/issues"
+    "url": "https://github.com/garik-code/api-amg/issues"
   },
-  "homepage": "https://github.com/garik-code/yo-generator-rest#readme",
+  "homepage": "https://github.com/garik-code/api-amg#readme",
   "dependencies": {
     "executive": "^1.6.3",
     "request": "^2.88.0"
