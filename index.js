@@ -30,9 +30,11 @@ Array.prototype.find = function (params) {
 class AMG {
 
     constructor (object) {
-      this.private_api_url = object['private_api'].url
+      this.private_api_url          = object['private_api'].url
       this.private_api_access_token = object['private_api'].access_token
-      this.memcached = new memcached(object['memcashed'].server, object['memcashed'].options);
+      this.memcached                = new memcached(object['memcashed'].server, object['memcashed'].options)
+      this.memcached_update_mc      = object['memcashed'].update
+      this.memcached_update_sec     = this.memcached_update_mc / 1000 * 2
     }
 
     reg (email, passw, name) {
@@ -86,6 +88,7 @@ class AMG {
       return new Promise((resolve, reject) => {
         this.memcached.get(type, (err, cache) => {
           if (typeof cache == 'undefined') {
+            console.log('NO cache');
             request.get(`${this.private_api_url}/${type}?access_token=${this.private_api_access_token}&${data}`, (error, response, body) => {
               if(error) reject(error)
               try {
@@ -93,13 +96,14 @@ class AMG {
                 if(typeof body.rows === 'undefined') {
                   resolve(body)
                 }else{
-                  this.memcached.add(type, body, 10, (err) => {})
+                  this.memcached.add(type, body, this.memcached_update_sec, (err) => {})
                   setInterval(() => {
+                    console.log('demon cache update');
                     request.get(`${this.private_api_url}/${type}?access_token=${this.private_api_access_token}&${data}`, (error, response, body) => {
                       body = JSON.parse(body)
-                      this.memcached.replace(type, body, 10, (err) => {})
+                      this.memcached.replace(type, body, this.memcached_update_sec, (err) => {})
                     })
-                  }, 5000)
+                  }, this.memcached_update_mc)
                   if (Object.values(data).length == 0) {
                     resolve(body.rows)
                   }else{
@@ -111,6 +115,7 @@ class AMG {
               }
             })
           }else{
+            console.log('get cache');
             if (Object.values(data).length == 0) {
               resolve(cache.rows)
             }else{
