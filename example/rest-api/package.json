@@ -10,6 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "api-amg": "^1.1.0",
-    "express": "^4.17.1"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6-alpha.5",
+    "express-rate-limit": "^5.0.0",
+    "route-cache": "^0.4.4"
   }
 }
