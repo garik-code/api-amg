@@ -115,8 +115,8 @@ Api.add('tests', { text: '123' })
 // {
 //   id: '5d88eac4a9a6fe07ef29fbcb',
 //   text: '123',
-//   createdAt: '2019-09-23T15:54:44.581Z',
-//   updatedAt: '2019-09-23T15:54:44.581Z'
+//   createdAt: '2019-09-23T13:51:16.341Z',
+//   updatedAt: '2019-09-23T17:27:55.871Z'
 // }
 
 ```
@@ -124,7 +124,7 @@ Api.add('tests', { text: '123' })
 
 // Get data:
 
-Api.get('tests', { id: '5d88cdd4a9a6fe07ef29fbba' })
+Api.get('tests', { id: '5d88eac4a9a6fe07ef29fbcb' })
 .then(
   success => console.log(success),
   err     => console.log(err)
@@ -134,8 +134,8 @@ Api.get('tests', { id: '5d88cdd4a9a6fe07ef29fbba' })
 //   {
 //     id: '5d88eac4a9a6fe07ef29fbcb',
 //     text: '123',
-//     createdAt: '2019-09-23T15:54:44.581Z',
-//     updatedAt: '2019-09-23T15:54:44.581Z'
+//     createdAt: '2019-09-23T13:51:16.341Z',
+//     updatedAt: '2019-09-23T17:27:55.871Z'
 //   }
 // ]
 
@@ -144,14 +144,14 @@ Api.get('tests', { id: '5d88cdd4a9a6fe07ef29fbba' })
 
 // Update data:
 
-Api.update('tests', '5d88cdd4a9a6fe07ef29fbba', { text: '123456' })
+Api.update('tests', '5d88eac4a9a6fe07ef29fbcb', { text: '123456' })
 .then(
   success => console.log(success),
   err     => console.log(err)
 )
 
 // {
-//   id: '5d88cdd4a9a6fe07ef29fbba',
+//   id: '5d88eac4a9a6fe07ef29fbcb',
 //   text: '123456',
 //   createdAt: '2019-09-23T13:51:16.341Z',
 //   updatedAt: '2019-09-23T17:27:55.871Z'
