@@ -28,6 +28,10 @@ yo rest
 
 yo rest:api
 
+// Take private api access token (MASTER_KEY)
+
+nano .env
+
 // Install AMG
 
 cd /my-project
@@ -37,7 +41,7 @@ npm init
 npm i api-amg --save
 nano index.js
 
-/////////////////////////////////////////////////////////////////
+...
 
 ```
 
