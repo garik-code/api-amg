@@ -32,6 +32,14 @@ yo rest:api
 
 nano .env
 
+# Generate documentation
+
+npm run docs
+
+# Start private api
+
+npm run start
+
 # Install AMG
 
 cd /my-project
