@@ -1,12 +1,38 @@
 const querystring = require('querystring')
 const request     = require('request')
 const exec        = require('executive')
+const memcached   = require('memcached')
+
+Array.prototype.find = function (params) {
+  let values_params  = Object.values(params)
+  let keys_params    = Object.keys(params)
+  let res = []
+  for (let i = 0; i <= this.length; i++) {
+    if (i == this.length) {
+      return res
+    }else{
+      let search = 0
+      for (let x = 0; x <= keys_params.length; x++) {
+        if (x == keys_params.length) {
+          if (search == keys_params.length) {
+            res.push(this[i])
+          }
+        }else{
+          if (this[i][keys_params[x]] == values_params[x]) {
+            search++
+          }
+        }
+      }
+    }
+  }
+}
 
 class AMG {
 
     constructor (object) {
-      this.url = object.url
-      this.access_token = object.access_token
+      this.private_api_url = object['private_api'].url
+      this.private_api_access_token = object['private_api'].access_token
+      this.memcached = new memcached(object['memcashed'].server, object['memcashed'].options);
     }
 
     reg (email, passw, name) {
@@ -17,8 +43,8 @@ class AMG {
 
     auth (email, passw) {
       return new Promise((resolve, reject) => {
-        let url = `${this.url}/auth`
-        exec.quiet([`curl -X POST ${url} -i -u ${email}:${passw} -d "access_token=${this.access_token}"`], (err, stdout, stderr) => {
+        let url = `${this.private_api_url}/auth`
+        exec.quiet([`curl -X POST ${url} -i -u ${email}:${passw} -d "access_token=${this.private_api_access_token}"`], (err, stdout, stderr) => {
           try {
             let token = stdout.split('"token":"')[1].split('","user')[0]
             resolve({ access_token: token })
@@ -31,7 +57,7 @@ class AMG {
 
     check (access_token) {
       return new Promise((resolve, reject) => {
-        request.get(`${this.url}/users/me?access_token=${access_token}`, (error, response, body) => {
+        request.get(`${this.private_api_url}/users/me?access_token=${access_token}`, (error, response, body) => {
           if(error) reject(error)
           try {
             body = JSON.parse(body)
@@ -47,8 +73,8 @@ class AMG {
       return new Promise((resolve, reject) => {
         request.post({
           headers: {'content-type' : 'application/x-www-form-urlencoded'},
-          url:     `${this.url}/${type}`,
-          body:    `access_token=${this.access_token}&${querystring.stringify(data)}`
+          url:     `${this.private_api_url}/${type}`,
+          body:    `access_token=${this.private_api_access_token}&${querystring.stringify(data)}`
         }, (error, response, body) => {
           if(error) reject(error)
           resolve(JSON.parse(body))
@@ -57,31 +83,8 @@ class AMG {
     }
 
     get (type, data) {
-      Array.prototype.find = function (params) {
-        let values_params  = Object.values(params)
-        let keys_params    = Object.keys(params)
-        let res = []
-        for (let i = 0; i <= this.length; i++) {
-          if (i == this.length) {
-            return res
-          }else{
-            let search = 0
-            for (let x = 0; x <= keys_params.length; x++) {
-              if (x == keys_params.length) {
-                if (search == keys_params.length) {
-                  res.push(this[i])
-                }
-              }else{
-                if (this[i][keys_params[x]] == values_params[x]) {
-                  search++
-                }
-              }
-            }
-          }
-        }
-      }
       return new Promise((resolve, reject) => {
-        request.get(`${this.url}/${type}?access_token=${this.access_token}&${data}`, (error, response, body) => {
+        request.get(`${this.private_api_url}/${type}?access_token=${this.private_api_access_token}&${data}`, (error, response, body) => {
           if(error) reject(error)
           try {
             body = JSON.parse(body)
@@ -110,11 +113,11 @@ class AMG {
               if (i == keys.length) {
                 request.put({
                   headers: {'content-type' : 'application/x-www-form-urlencoded'},
-                  url:     `${this.url}/${type}/${id}`,
-                  body:    `access_token=${this.access_token}${params}`
+                  url:     `${this.private_api_url}/${type}/${id}`,
+                  body:    `access_token=${this.private_api_access_token}${params}`
                 }, (error, response, body) => {
                   if(error) reject(error)
-                  resolve(JSON.parse(body)) 
+                  resolve(JSON.parse(body))
                 })
               }else{
                 if (typeof data[keys[i]] != 'undefined') {

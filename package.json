@@ -18,6 +18,7 @@
   "homepage": "https://github.com/garik-code/api-amg#readme",
   "dependencies": {
     "executive": "^1.6.3",
+    "memcached": "^2.2.2",
     "request": "^2.88.0"
   }
 }
