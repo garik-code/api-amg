@@ -7,7 +7,7 @@ Install mongodb   : https://docs.mongodb.com/manual/installation/
 Install nodejs    : https://nodejs.org/en/download/
 
 
-``` Javascript
+``` shell
 
 /////////////////////////////////////////////////////////////////
 
