@@ -127,3 +127,21 @@ Api.get('tests', { id: '5d88cdd4a9a6fe07ef29fbba', text: '123' })
 // ]
 
 ```
+``` javascript
+
+// UPDATE DATA:
+
+Api.update('tests', '5d88cdd4a9a6fe07ef29fbba', { text: '12345' })
+.then(
+  success => console.log(success),
+  err     => console.log(err)
+)
+
+// {
+//   id: '5d88cdd4a9a6fe07ef29fbba',
+//   text: '12345',
+//   createdAt: '2019-09-23T13:51:16.341Z',
+//   updatedAt: '2019-09-23T13:51:16.341Z'
+// }
+
+```
