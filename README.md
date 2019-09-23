@@ -51,7 +51,8 @@ nano index.js
 
 ...
 
-build a rest api using this module
+Build a rest api using this module
+Example: https://github.com/garik-code/api-amg/blob/master/example
 
 ```
 
