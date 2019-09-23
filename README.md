@@ -1,7 +1,8 @@
 # API ❤ AMG
 
-
-Install mongodb: https://docs.mongodb.com/manual/installation/
+Install memcached : https://memcached.org/downloads
+Install mongodb   : https://docs.mongodb.com/manual/installation/
+Install nodejs    : https://nodejs.org/en/download/
 
 
 ``` Javascript
@@ -34,8 +35,14 @@ yo rest:api
 
 const Amg = require('api-amg')
 const Api = new Amg({
-  url: 'http://localhost:9000',
-  access_token: 'j8jx10hcOvxKP0kNPTEBzofBdfHgjjtZ'
+  private_api : {
+    url: 'http://localhost:9000',
+    access_token: 'j8jx10hcOvxKP0kNPTEBzofBdfHgjjtZ'
+  },
+  memcashed: {
+    server : '127.0.0.1:11211',
+    options: {}
+  }
 })
 
 ```

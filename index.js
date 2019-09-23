@@ -84,18 +84,38 @@ class AMG {
 
     get (type, data) {
       return new Promise((resolve, reject) => {
-        request.get(`${this.private_api_url}/${type}?access_token=${this.private_api_access_token}&${data}`, (error, response, body) => {
-          if(error) reject(error)
-          try {
-            body = JSON.parse(body)
-            if(typeof body.rows === 'undefined') resolve(body)
+        this.memcached.get(type, (err, cache) => {
+          if (typeof cache == 'undefined') {
+            request.get(`${this.private_api_url}/${type}?access_token=${this.private_api_access_token}&${data}`, (error, response, body) => {
+              if(error) reject(error)
+              try {
+                body = JSON.parse(body)
+                if(typeof body.rows === 'undefined') {
+                  resolve(body)
+                }else{
+                  this.memcached.add(type, body, 10, (err) => {})
+                  setInterval(() => {
+                    request.get(`${this.private_api_url}/${type}?access_token=${this.private_api_access_token}&${data}`, (error, response, body) => {
+                      body = JSON.parse(body)
+                      this.memcached.replace(type, body, 10, (err) => {})
+                    })
+                  }, 5000)
+                  if (Object.values(data).length == 0) {
+                    resolve(body.rows)
+                  }else{
+                    resolve(body.rows.find(data))
+                  }
+                }
+              } catch (e) {
+                reject('err')
+              }
+            })
+          }else{
             if (Object.values(data).length == 0) {
-              resolve(body.rows)
+              resolve(cache.rows)
             }else{
-              resolve(body.rows.find(data))
+              resolve(cache.rows.find(data))
             }
-          } catch (e) {
-            reject('err')
           }
         })
       })
