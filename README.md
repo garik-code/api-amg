@@ -182,4 +182,4 @@ Api.update('tests', '5d88eac4a9a6fe07ef29fbcb', { text: '123456' })
 ```
 
 
-Example: https://github.com/garik-code/api-amg/blob/master/example
+Example: https://github.com/garik-code/api-amg/blob/master/example/rest-api/index.js
