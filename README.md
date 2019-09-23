@@ -39,7 +39,7 @@ const Api = require('api-amg')
 
 // REG USER:
 
-Api.reg('mail@garik.site', 'password', 'name', key, api)
+Api.reg('mail@garik.site', 'password', 'Igor M', key, api)
 .then(
   success => console.log(success),
   err     => console.log(err)
@@ -47,7 +47,7 @@ Api.reg('mail@garik.site', 'password', 'name', key, api)
 
 // {
 //   "id":"5d88c9e9a9a6fe07ef29fbb9",
-//   "name":"garik",
+//   "name":"Igor M",
 //   "picture":"https://gravatar.com/avatar/3a0783a28ee076b86376fb308d9e194d?d=identicon",
 //   "email":"mail@garik.site",
 //   "createdAt":"2019-09-23T13:34:33.754Z"
@@ -78,7 +78,7 @@ Api.check('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkODhjOWU5YTlhNmZlMDdl
 )
 
 // { id: '5d88c9e9a9a6fe07ef29fbb9',
-//   name: 'garik',
+//   name: 'Igor M',
 //   picture: 'https://gravatar.com/avatar/3a0783a28ee076b86376fb308d9e194d?d=identicon',
 //   email: 'mail@garik.site',
 //   createdAt: '2019-09-23T13:34:33.754Z'
