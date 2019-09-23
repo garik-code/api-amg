@@ -12,22 +12,30 @@ Install nodejs    : https://nodejs.org/en/download/
 /////////////////////////////////////////////////////////////////
 
 
-// INSTALL AMG
+// Install generator private api
 
-npm install api-amg --save
 npm install -g yo
 npm install -g generator-rest
 
+// Generate a new PRIVATE API
 
-// generate a new PRIVATE API
-
+cd /my-project
+mkdir private-api
+cd private-api
 yo rest
 
-
-// generate a new API ENDPOINT inside your project
+// Generate a new API ENDPOINT inside your project
 
 yo rest:api
 
+// Install AMG
+
+cd /my-project
+mkdir rest-api
+cd rest-api
+npm init
+npm i api-amg --save
+nano index.js
 
 /////////////////////////////////////////////////////////////////
 
