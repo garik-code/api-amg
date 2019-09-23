@@ -51,57 +51,60 @@ const Api = new Amg({
 ```
 ``` javascript
 
-// REG USER:
+// User registration:
 
-Api.reg('mail@garik.site', 'password', 'Igor M')
+Api.reg('admin@example.com', 'password', 'Igor M')
 .then(
   success => console.log(success),
   err     => console.log(err)
 )
 
 // {
-//   "id":"5d88c9e9a9a6fe07ef29fbb9",
-//   "name":"Igor M",
-//   "picture":"https://gravatar.com/avatar/3a0783a28ee076b86376fb308d9e194d?d=identicon",
-//   "email":"mail@garik.site",
-//   "createdAt":"2019-09-23T13:34:33.754Z"
-// }
-
-```
-``` javascript
-
-// AUTH USER:
-
-Api.auth('mail@garik.site', 'password')
-.then(
-  success => console.log(success),
-  err     => console.log(err)
-)
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkODhjOWU5YTlhNmZlMDdlZjI5ZmJiOSIsImlhdCI6MTU2OTI0NTc2OH0.LbSkr0z1MhQhN5CJZTrc0GAD19ZJlDn-L3jIIWf1dPE
-
-```
-``` javascript
-
-// CHECK AUTH USER:
-
-Api.check('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkODhjOWU5YTlhNmZlMDdlZjI5ZmJiOSIsImlhdCI6MTU2OTI0NTc2OH0.LbSkr0z1MhQhN5CJZTrc0GAD19ZJlDn-L3jIIWf1dPE')
-.then(
-  success => console.log(success),
-  err     => console.log(err)
-)
-
-// { id: '5d88c9e9a9a6fe07ef29fbb9',
+//   id: '5d88e96aa9a6fe07ef29fbca',
 //   name: 'Igor M',
-//   picture: 'https://gravatar.com/avatar/3a0783a28ee076b86376fb308d9e194d?d=identicon',
-//   email: 'mail@garik.site',
-//   createdAt: '2019-09-23T13:34:33.754Z'
+//   picture: 'https://gravatar.com/avatar/e64c7d89f26bd1972efa854d13d7dd61?d=identicon',
+//   email: 'admin@example.com',
+//   createdAt: '2019-09-23T15:48:58.409Z'
 // }
 
 ```
 ``` javascript
 
-// ADD DATA:
+// User authorization:
+
+Api.auth('admin@example.com', 'password')
+.then(
+  success => console.log(success),
+  err     => console.log(err)
+)
+
+// {
+//   access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkODhlOTZhYTlhNmZlMDdlZjI5ZmJjYSIsImlhdCI6MTU2OTI1MzgwN30.52CBLLzNvYLvavVrgIFPJ6x0KtwFU1WYNG4u_F0m-iA'
+// }
+
+```
+``` javascript
+
+// User authorization check:
+
+Api.check('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkODhlOTZhYTlhNmZlMDdlZjI5ZmJjYSIsImlhdCI6MTU2OTI1MzgwN30.52CBLLzNvYLvavVrgIFPJ6x0KtwFU1WYNG4u_F0m-iA')
+.then(
+  success => console.log(success),
+  err     => console.log(err)
+)
+
+// {
+//   id: '5d88e96aa9a6fe07ef29fbca',
+//   name: 'Igor M',
+//   picture: 'https://gravatar.com/avatar/e64c7d89f26bd1972efa854d13d7dd61?d=identicon',
+//   email: 'admin@example.com',
+//   createdAt: '2019-09-23T15:48:58.409Z'
+// }
+
+```
+``` javascript
+
+// Add data:
 
 Api.add('tests', { text: '123' })
 .then(
@@ -110,18 +113,18 @@ Api.add('tests', { text: '123' })
 )
 
 // {
-//   "id":"5d88cdd4a9a6fe07ef29fbba",
-//   "text":"123",
-//   "createdAt":"2019-09-23T13:51:16.341Z",
-//   "updatedAt":"2019-09-23T13:51:16.341Z"
+//   id: '5d88eac4a9a6fe07ef29fbcb',
+//   text: '123',
+//   createdAt: '2019-09-23T15:54:44.581Z',
+//   updatedAt: '2019-09-23T15:54:44.581Z'
 // }
 
 ```
 ``` javascript
 
-// GET DATA:
+// Get data:
 
-Api.get('tests', { id: '5d88cdd4a9a6fe07ef29fbba', text: '123' })
+Api.get('tests', { id: '5d88cdd4a9a6fe07ef29fbba' })
 .then(
   success => console.log(success),
   err     => console.log(err)
@@ -129,19 +132,19 @@ Api.get('tests', { id: '5d88cdd4a9a6fe07ef29fbba', text: '123' })
 
 // [
 //   {
-//     id: '5d88cdd4a9a6fe07ef29fbba',
+//     id: '5d88eac4a9a6fe07ef29fbcb',
 //     text: '123',
-//     createdAt: '2019-09-23T13:51:16.341Z',
-//     updatedAt: '2019-09-23T13:51:16.341Z'
+//     createdAt: '2019-09-23T15:54:44.581Z',
+//     updatedAt: '2019-09-23T15:54:44.581Z'
 //   }
 // ]
 
 ```
 ``` javascript
 
-// UPDATE DATA:
+// Update data:
 
-Api.update('tests', '5d88cdd4a9a6fe07ef29fbba', { text: '12345' })
+Api.update('tests', '5d88cdd4a9a6fe07ef29fbba', { text: '123456' })
 .then(
   success => console.log(success),
   err     => console.log(err)
@@ -149,9 +152,9 @@ Api.update('tests', '5d88cdd4a9a6fe07ef29fbba', { text: '12345' })
 
 // {
 //   id: '5d88cdd4a9a6fe07ef29fbba',
-//   text: '12345',
+//   text: '123456',
 //   createdAt: '2019-09-23T13:51:16.341Z',
-//   updatedAt: '2019-09-23T13:51:16.341Z'
+//   updatedAt: '2019-09-23T17:27:55.871Z'
 // }
 
 ```

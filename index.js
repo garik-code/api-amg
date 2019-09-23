@@ -88,7 +88,6 @@ class AMG {
       return new Promise((resolve, reject) => {
         this.memcached.get(type, (err, cache) => {
           if (typeof cache == 'undefined') {
-            console.log('NO cache');
             request.get(`${this.private_api_url}/${type}?access_token=${this.private_api_access_token}&${data}`, (error, response, body) => {
               if(error) reject(error)
               try {
@@ -98,7 +97,6 @@ class AMG {
                 }else{
                   this.memcached.add(type, body, this.memcached_update_sec, (err) => {})
                   setInterval(() => {
-                    console.log('demon cache update');
                     request.get(`${this.private_api_url}/${type}?access_token=${this.private_api_access_token}&${data}`, (error, response, body) => {
                       body = JSON.parse(body)
                       this.memcached.replace(type, body, this.memcached_update_sec, (err) => {})
@@ -115,7 +113,6 @@ class AMG {
               }
             })
           }else{
-            console.log('get cache');
             if (Object.values(data).length == 0) {
               resolve(cache.rows)
             }else{
