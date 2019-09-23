@@ -103,24 +103,25 @@ class AMG {
         this.get(type, { id: id })
         .then(
           getData => {
-            console.log('test');
-            console.log(getData);
             let values = Object.values(getData[0])
             let keys   = Object.keys(getData[0])
+            let params = ''
             for (let i = 0; i <= keys.length; i++) {
               if (i == keys.length) {
-                // request.put({
-                //   headers: {'content-type' : 'application/x-www-form-urlencoded'},
-                //   url:     `${this.url}/${type}/${id}`,
-                //   body:    `access_token=${this.access_token}&${data}`
-                // }, (error, response, body) => {
-                //   if(error) reject(error)
-                //   resolve(body)
-                // })
+                request.put({
+                  headers: {'content-type' : 'application/x-www-form-urlencoded'},
+                  url:     `${this.url}/${type}/${id}`,
+                  body:    `access_token=${this.access_token}${params}`
+                }, (error, response, body) => {
+                  if(error) reject(error)
+                  resolve(JSON.parse(body)) 
+                })
               }else{
-                // if (data.indexOf(keys[i]) < 0) {
-                //   data = `${data}&${keys[i]}=${values[i]}`
-                // }
+                if (typeof data[keys[i]] != 'undefined') {
+                  params = `${params}&${keys[i]}=${data[keys[i]]}`
+                }else{
+                  params = `${params}&${keys[i]}=${values[i]}`
+                }
               }
             }
           },
