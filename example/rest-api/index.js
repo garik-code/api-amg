@@ -1,4 +1,11 @@
 const Amg = require('api-amg')
+const express = require('express')
+const fileUpload = require('express-fileupload')
+const rateLimit = require('express-rate-limit')
+const routeCache = require('route-cache')
+const cors = require('cors')
+const app = express()
+
 const Api = new Amg({
   private_api    : {
     access_token : 'j8jx10hcOvxKP0kNPTEBzofBdfHgjjtZ', // private api access token (MASTER_KEY)
@@ -10,14 +17,6 @@ const Api = new Amg({
     update  : 1000               // millisecond update time
   }
 })
-
-const express = require('express')
-const fileUpload = require('express-fileupload')
-const rateLimit = require('express-rate-limit')
-const routeCache = require('route-cache')
-const cors = require('cors')
-const app = express()
-
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
