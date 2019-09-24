@@ -34,35 +34,63 @@ app.use(limiter)
 app.use('/auth', brutalLimiter)
 app.use('/reg', brutalLimiter)
 
-// app.get('/news/:token', routeCache.cacheSeconds(1), (req, res, next) => {
-//   News.search(req.params.token)
-//   .then(
-//     json => res.send(json),
-//     err => res.send(err)
-//   )
-// })
-
 app.post('/auth', (req, res) => {
-  res.send(req.params)
+  res.send(req.body)
 })
 
 app.post('/reg', (req, res) => {
-  res.send(req.params)
+  res.send(req.body)
 })
 
 app.post('/security', (req, res) => {
-  res.send(req.params)
+  let access_token = ''
+  if (typeof req.body.access_token != 'string') {
+    res.json({ err: 'access_token' }).status(500)
+  }else{
+    access_token = req.body.access_token
+  }
+  Api.check(access_token)
+  .then(
+    success => {
+      res.json(success).status(200)
+    },
+    err => res.json({ err: 'access_token' }).status(500)
+  )
 })
 
 app.post('/update', (req, res) => {
-  res.send(req.params)
+  let access_token = ''
+  if (typeof req.body.access_token != 'string') {
+    res.json({ err: 'access_token' }).status(500)
+  }else{
+    access_token = req.body.access_token
+  }
+  Api.check(access_token)
+  .then(
+    success => {
+      res.send(req.body)
+    },
+    err => res.json({ err: 'access_token' }).status(500)
+  )
 })
 
 app.post('/add', (req, res) => {
-  res.send(req.params)
+  let access_token = ''
+  if (typeof req.body.access_token != 'string') {
+    res.json({ err: 'access_token' }).status(500)
+  }else{
+    access_token = req.body.access_token
+  }
+  Api.check(access_token)
+  .then(
+    success => {
+      res.send(req.body)
+    },
+    err => res.json({ err: 'access_token' }).status(500)
+  )
 })
 
-app.post('/get', routeCache.cacheSeconds(2), (req, res) => {
+app.post('/get', (req, res) => {
   let access_token = ''
   let type         = ''
   let data         = {}
@@ -94,10 +122,9 @@ app.post('/get', routeCache.cacheSeconds(2), (req, res) => {
   )
 })
 
-app.listen(1313)
+app.get('/cache', routeCache.cacheSeconds(3), (req, res, next) => {
+  let unixtime = Math.floor(new Date() / 1000)
+  res.send(`cache start ${unixtime}`)
+})
 
-// Api.reg('test@example.com', 'rootroot', 'root')
-// .then(
-//   success => console.log(success),
-//   err     => console.log(err)
-// )
+app.listen(1313)
