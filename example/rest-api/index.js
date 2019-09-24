@@ -62,23 +62,35 @@ app.post('/add', (req, res) => {
   res.send(req.params)
 })
 
-app.post('/get', (req, res) => {
-  let type = ''
-  let data = {}
-  if (typeof req.body.type != 'string') {
-    res.json({ err: 'type' })
+app.post('/get', routeCache.cacheSeconds(2), (req, res) => {
+  let access_token = ''
+  let type         = ''
+  let data         = {}
+  if (typeof req.body.access_token != 'string') {
+    res.json({ err: 'access_token' }).status(500)
   }else{
-    type = req.body.type.toLowerCase()
+    access_token = req.body.access_token
   }
-  if (typeof req.body.data == 'string') {
-    try {
-      data = JSON.parse(req.body.data)
-    } catch (e) {}
-  }
-  Api.get(type, data)
+  Api.check(access_token)
   .then(
-    success => res.json(success).status(200),
-    err     => res.json(err).status(500)
+    success => {
+      if (typeof req.body.type != 'string') {
+        res.json({ err: 'type' }).status(500)
+      }else{
+        type = req.body.type.toLowerCase()
+      }
+      if (typeof req.body.data == 'string') {
+        try {
+          data = JSON.parse(req.body.data)
+        } catch (e) {}
+      }
+      Api.get(type, data)
+      .then(
+        success => res.json(success).status(200),
+        err     => res.json(err).status(500)
+      )
+    },
+    err => res.json({ err: 'access_token' }).status(500)
   )
 })
 
