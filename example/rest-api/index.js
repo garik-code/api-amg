@@ -42,6 +42,48 @@ app.use('/reg', brutalLimiter)
 //   )
 // })
 
+app.post('/auth', (req, res) => {
+  res.send(req.params)
+})
+
+app.post('/reg', (req, res) => {
+  res.send(req.params)
+})
+
+app.post('/security', (req, res) => {
+  res.send(req.params)
+})
+
+app.post('/update', (req, res) => {
+  res.send(req.params)
+})
+
+app.post('/add', (req, res) => {
+  res.send(req.params)
+})
+
+app.post('/get', (req, res) => {
+  let type = ''
+  let data = {}
+  if (typeof req.body.type != 'string') {
+    res.json({ err: 'type' })
+  }else{
+    type = req.body.type.toLowerCase()
+  }
+  if (typeof req.body.data == 'string') {
+    try {
+      data = JSON.parse(req.body.data)
+    } catch (e) {}
+  }
+  Api.get(type, data)
+  .then(
+    success => res.json(success).status(200),
+    err     => res.json(err).status(500)
+  )
+})
+
+app.listen(1313)
+
 // Api.reg('test@example.com', 'rootroot', 'root')
 // .then(
 //   success => console.log(success),
