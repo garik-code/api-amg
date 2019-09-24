@@ -99,7 +99,7 @@ app.post('/update', (req, res) => { //
     success => {
       res.send(req.body)
     },
-    err => res.json({ err: 'access_token' }).status(500)
+    err => res.json({ err: 'access_token' }).status(500) 
   )
 })
 
