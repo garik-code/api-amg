@@ -35,11 +35,40 @@ app.use('/auth', brutalLimiter)
 app.use('/reg', brutalLimiter)
 
 app.post('/auth', (req, res) => {
-  res.send(req.body)
+  if (typeof req.body == 'undefined') {
+    res.json({ err: 'request' }).status(500)
+  }
+  if (typeof req.body.email == 'undefined') {
+    res.json({ err: 'email' }).status(500)
+  }
+  if (typeof req.body.passw == 'undefined') {
+    res.json({ err: 'passw' }).status(500)
+  }
+  Api.auth(req.body.email, req.body.passw)
+  .then(
+    success => res.json(success).status(200),
+    err     => res.json(err).status(500)
+  )
 })
 
 app.post('/reg', (req, res) => {
-  res.send(req.body)
+  if (typeof req.body == 'undefined') {
+    res.json({ err: 'request' }).status(500)
+  }
+  if (typeof req.body.email == 'undefined') {
+    res.json({ err: 'email' }).status(500)
+  }
+  if (typeof req.body.passw == 'undefined') {
+    res.json({ err: 'passw' }).status(500)
+  }
+  if (typeof req.body.name == 'undefined') {
+    res.json({ err: 'name' }).status(500)
+  }
+  Api.reg(req.body.email, req.body.passw, req.body.name)
+  .then(
+    success => res.json(success).status(200),
+    err     => res.json(err).status(500)
+  )
 })
 
 app.post('/security', (req, res) => {
@@ -58,7 +87,7 @@ app.post('/security', (req, res) => {
   )
 })
 
-app.post('/update', (req, res) => {
+app.post('/update', (req, res) => { //
   let access_token = ''
   if (typeof req.body == 'undefined' || typeof req.body.access_token != 'string') {
     res.json({ err: 'access_token' }).status(500)
@@ -74,7 +103,7 @@ app.post('/update', (req, res) => {
   )
 })
 
-app.post('/add', (req, res) => {
+app.post('/add', (req, res) => { //
   let access_token = ''
   if (typeof req.body == 'undefined' || typeof req.body.access_token != 'string') {
     res.json({ err: 'access_token' }).status(500)
