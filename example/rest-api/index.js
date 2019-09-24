@@ -1,3 +1,13 @@
+// Нужно сделать:
+//
+// 1. проверить add, update
+// 2. загрузка файлов
+// 3. авторизация через соц сети
+// 4. смена аватарки
+// 5. загрузка файлов
+// 6. подтверждение email
+// 7. восстановление пароля
+
 const Amg = require('api-amg')
 const express = require('express')
 const fileUpload = require('express-fileupload')
@@ -87,7 +97,7 @@ app.post('/security', (req, res) => {
   )
 })
 
-app.post('/update', (req, res) => { 
+app.post('/update', (req, res) => { //
   let access_token = ''
   let type = ''
   let data = {}
@@ -130,7 +140,7 @@ app.post('/update', (req, res) => {
   )
 })
 
-app.post('/add', (req, res) => {
+app.post('/add', (req, res) => { //
   let access_token = ''
   let type = ''
   let data = {}
