@@ -87,8 +87,11 @@ app.post('/security', (req, res) => {
   )
 })
 
-app.post('/update', (req, res) => { //
+app.post('/update', (req, res) => { 
   let access_token = ''
+  let type = ''
+  let data = {}
+  let id   = ''
   if (typeof req.body == 'undefined' || typeof req.body.access_token != 'string') {
     res.json({ err: 'access_token' }).status(500)
   }else{
@@ -97,14 +100,40 @@ app.post('/update', (req, res) => { //
   Api.check(access_token)
   .then(
     success => {
-      res.send(req.body)
+      if (typeof req.body.type != 'string') {
+        res.json({ err: 'type' }).status(500)
+      }else{
+        type = req.body.type.toLowerCase()
+      }
+      if (typeof req.body.data != 'string') {
+        res.json({ err: 'data' }).status(500)
+      }
+      if (typeof req.body.id != 'string') {
+        res.json({ err: 'id' }).status(500)
+      }else{
+        id = req.body.id
+      }
+      if (typeof req.body.data == 'string') {
+        try {
+          data = JSON.parse(req.body.data)
+        } catch (e) {
+          res.json({ err: 'data' }).status(500)
+        }
+      }
+      Api.update(type, id, data)
+      .then(
+        success => res.json(success).status(200),
+        err     => res.json(err).status(500)
+      )
     },
-    err => res.json({ err: 'access_token' }).status(500) 
+    err => res.json({ err: 'access_token' }).status(500)
   )
 })
 
-app.post('/add', (req, res) => { //
+app.post('/add', (req, res) => {
   let access_token = ''
+  let type = ''
+  let data = {}
   if (typeof req.body == 'undefined' || typeof req.body.access_token != 'string') {
     res.json({ err: 'access_token' }).status(500)
   }else{
@@ -113,7 +142,26 @@ app.post('/add', (req, res) => { //
   Api.check(access_token)
   .then(
     success => {
-      res.send(req.body)
+      if (typeof req.body.type != 'string') {
+        res.json({ err: 'type' }).status(500)
+      }else{
+        type = req.body.type.toLowerCase()
+      }
+      if (typeof req.body.data != 'string') {
+        res.json({ err: 'data' }).status(500)
+      }
+      if (typeof req.body.data == 'string') {
+        try {
+          data = JSON.parse(req.body.data)
+        } catch (e) {
+          res.json({ err: 'data' }).status(500)
+        }
+      }
+      Api.add(type, data)
+      .then(
+        success => res.json(success).status(200),
+        err     => res.json(err).status(500)
+      )
     },
     err => res.json({ err: 'access_token' }).status(500)
   )
