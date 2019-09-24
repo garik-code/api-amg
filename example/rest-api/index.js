@@ -44,7 +44,7 @@ app.post('/reg', (req, res) => {
 
 app.post('/security', (req, res) => {
   let access_token = ''
-  if (typeof req.body.access_token != 'string') {
+  if (typeof req.body == 'undefined' || typeof req.body.access_token != 'string') {
     res.json({ err: 'access_token' }).status(500)
   }else{
     access_token = req.body.access_token
@@ -60,7 +60,7 @@ app.post('/security', (req, res) => {
 
 app.post('/update', (req, res) => {
   let access_token = ''
-  if (typeof req.body.access_token != 'string') {
+  if (typeof req.body == 'undefined' || typeof req.body.access_token != 'string') {
     res.json({ err: 'access_token' }).status(500)
   }else{
     access_token = req.body.access_token
@@ -76,7 +76,7 @@ app.post('/update', (req, res) => {
 
 app.post('/add', (req, res) => {
   let access_token = ''
-  if (typeof req.body.access_token != 'string') {
+  if (typeof req.body == 'undefined' || typeof req.body.access_token != 'string') {
     res.json({ err: 'access_token' }).status(500)
   }else{
     access_token = req.body.access_token
@@ -94,7 +94,7 @@ app.post('/get', (req, res) => {
   let access_token = ''
   let type         = ''
   let data         = {}
-  if (typeof req.body.access_token != 'string') {
+  if (typeof req.body == 'undefined' || typeof req.body.access_token != 'string') {
     res.json({ err: 'access_token' }).status(500)
   }else{
     access_token = req.body.access_token
