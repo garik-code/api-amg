@@ -1,3 +1,5 @@
+<a href="https://www.npmjs.com/package/api-amg" target="_blank"><img src="https://nodei.co/npm/api-amg.png?compact=true" /></a>
+
 # API ❤ AMG
 
 Install memcached : https://memcached.org/downloads
